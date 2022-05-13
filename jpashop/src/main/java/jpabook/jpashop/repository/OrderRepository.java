@@ -25,13 +25,13 @@ public class OrderRepository {
         return em.find(Order.class, id);
     }
 
-    public List<Order> findAll(OrderSearch orderSearch) {
+    /*public List<Order> findAll(OrderSearch orderSearch) {
         String jpql = "select o from Order o join o.member m";
 
         return em.createQuery("select o from Order o join o.member m",
                 .setMaxResults(1000) // 최대 1000건
                 .getResultList();
-    }
+    }*/
 
     /**
      * JPA Criteria
