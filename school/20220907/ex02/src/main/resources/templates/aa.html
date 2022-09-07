@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:footer="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var testa = [[${mya}]];
+        console.log(testa)
+    </script>
+    <style>
+        .mystyle{
+            width: 100px;
+            height: 100px;
+            background-color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+<p th:text="${aa}">
+    원래 문자열 입니다.
+</p>
+<ul>
+    <li th:each="name:${alist}">
+        [[${name}]]
+    </li>
+</ul>
+
+<div th:if="${myfalse}">
+    true면 나옵니다..
+</div>
+<div th:classappend="${mytrue}? 'mystyle'">
+
+</div>
+
+<div th:replace="footer::copy">
+</div>
+
+</body>
+</html>
