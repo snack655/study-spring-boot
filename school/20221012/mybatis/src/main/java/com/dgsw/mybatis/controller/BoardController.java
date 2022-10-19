@@ -1,20 +1,20 @@
 package com.dgsw.mybatis.controller;
 
 import com.dgsw.mybatis.dto.Test;
-import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-@Slf4j
 @Controller
 @RequestMapping("board")
 public class BoardController {
@@ -22,11 +22,42 @@ public class BoardController {
     @Autowired
     SqlSessionTemplate sqlSessionTemplate;
 
+    @GetMapping("update")
+    public String update(int idx, Test test,Model model){
+        System.out.println("idx = "+idx);
+        test = sqlSessionTemplate.selectOne("test.findbyidx",idx);
+        System.out.println(test);
+        model.addAttribute("test",test);
+        return "insert";
+    }
+
+    @PostMapping("update")
+    public String pupdate(Test test){
+        sqlSessionTemplate.update("test.updatetest",test);
+        return "redirect:/board/findall";
+    }
+
+    @PostMapping("delete")
+    public String delete(int[] idx){
+        List<Integer> list = new ArrayList<>();
+        if( idx != null){
+            System.out.println("출력시작");
+            for (int i =0 ; i<idx.length ; i++) {
+                System.out.println(idx[i]);
+                list.add(idx[i]);
+            }
+            System.out.println("출력끝");
+        }
+        sqlSessionTemplate.delete("test.deletetest",list);
+
+        System.out.println("delete");
+        return "redirect:/board/findall";
+    }
+
     // select 해서 테이블 내용 뿌려주는거
     @GetMapping("findall")
     public String findall(Model model){
         System.out.println("findall");
-        System.out.println("여기요");
 
         List<Test> testlist = sqlSessionTemplate.selectList("test.findall");
 
@@ -47,9 +78,6 @@ public class BoardController {
 //        System.out.println(aa);
 //        System.out.println(bb);
         // single quota '
-
-        System.out.println("실행되고 있니?");
-
         if( bindingResult.hasErrors()){
             System.out.println("에러 있음");
 //            model.addAttribute("error",true);
@@ -57,31 +85,8 @@ public class BoardController {
         }
 
         System.out.println(test);
-        sqlSessionTemplate.insert("insert", test);
+        sqlSessionTemplate.insert("test.inserttest", test);
 
         return "redirect:/board/findall";
     }
-
-    @GetMapping("update")
-    public String update(int idx, Test test, Model model) {
-        System.out.println("idx = " + idx);
-        test = sqlSessionTemplate.selectOne("test.findbyidx", idx);
-        System.out.println(test);
-        model.addAttribute("test", test);
-        return "insert";
-    }
-
-    @PostMapping("update")
-    public String pupdate(Test test) {
-        return "redirect:/board/findall";
-    }
-
-    @PostMapping("findall")
-    public String delete(Long[] args) {
-        System.out.println("삭제요");
-        Arrays.stream(args).forEach(arg ->
-                sqlSessionTemplate.delete("delete", arg));
-        return "redirect:/board/findall";
-    }
-
 }

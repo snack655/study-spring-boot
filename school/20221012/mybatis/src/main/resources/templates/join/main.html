@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common::html-head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <h1>findall</h1>
+    <div th:replace="common::html-nav">
+    </div>
+    <div class="row border mb-3">
+        <div class="col-6">
+            학생테이블
+            <table class="table">
+                <tr>
+                    <th>idx</th>
+                    <th>학년</th>
+                    <th>이름</th>
+                </tr>
+                <tr th:each="student:${studentlist}">
+                    <td th:text="${student.h_idx}"></td>
+                    <td th:text="${student.grade}"></td>
+                    <td th:text="${student.name}"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-6">
+            수강테이블
+            <table class="table">
+                <tr>
+                    <th>학생idx(FK)</th>
+                    <th>idx(PK)</th>
+                    <th>과목명</th>
+                </tr>
+                <tr><td></td></tr>
+            </table>
+        </div>
+    </div>
+    <div class="row border my-3">
+        학생수강테이블(합쳐서 보여주는곳)
+        <table class="table">
+            <tr>
+                <th>idx</th>
+                <th>학년</th>
+                <th>이름</th>
+                <th>과목명</th>
+            </tr>
+        </table>
+    </div>
+
+    <form action="/board/delete" method="post">
+        <div>
+            <div th:each="test:${testlist}">
+                <input type="checkbox" name="idx" th:value="${test.idx}">
+                [[${test}]]
+                <a th:href="@{/board/update(idx=${test.idx})}">수정</a>
+            </div>
+        </div>
+        <input type="submit" value="삭제">
+    </form>
+    <div th:replace="common::html-foot">
+    </div>
+</div>
+
+</body>
+</html>
