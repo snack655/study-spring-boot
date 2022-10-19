@@ -43,11 +43,11 @@ tasks.named('bootBuildImage') {
 	environment = ['BP_NATIVE_IMAGE': 'true']
 }
 
-tasks.named('hibernate') {
+/*tasks.named('hibernate') {
 	enhance {
 		enableLazyInitialization = true
 		enableDirtyTracking = true
 		enableAssociationManagement = true
 		enableExtendedEnhancement = false
 	}
-}
+}*/
