@@ -13,12 +13,13 @@ public class DocumentRepository {
 
     private final EntityManager em;
 
-    public void save(Document document) {
+    public Long save(Document document) {
         if (document.getId() == null) {
             em.persist(document);
         } else {
             em.merge(document);
         }
+        return document.getId();
     }
 
     public Document findOne(Long id) {
