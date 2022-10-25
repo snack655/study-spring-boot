@@ -41,7 +41,7 @@ public class DocumentController {
     public String list(Model model) {
         List<Document> documents = documentService.findDocuments();
         model.addAttribute("documents", documents);
-        return "documentList";
+        return "documents/documentList";
     }
 
     @GetMapping("/view/{documentId}")
