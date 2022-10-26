@@ -49,6 +49,7 @@ public class DocumentController {
         Document document = documentService.findOne(documentId);
         model.addAttribute("document",document);
         document.addViewCount();
+        documentService.saveItem(document);
         return "documents/documentView";
     }
 
