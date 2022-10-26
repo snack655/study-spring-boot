@@ -1,9 +1,4 @@
 @font-face {
-    font-family: 'ef_diary';
-    src: url("font/ef_diary.ttf") format('truetype');
-}
-
-@font-face {
     font-family: 'BinggraeSamanco-Bold';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/BinggraeSamanco-Bold.woff') format('woff');
     font-weight: normal;
@@ -24,4 +19,65 @@
     background: #20c997;
     border-radius: 30px;
     border: #00000000;
+}
+
+.melog-submit-button {
+    width: 75px;
+    height: 32px;
+    font-size: 13px;
+    font-family: "Nanum Gothic";
+    color: white;
+    text-align: center;
+    background: #20c997;
+    border-radius: 30px;
+    border: #00000000;
+}
+
+.melog-input {
+    font-family: "Nanum Gothic";
+    color: black;
+    width: 100%;
+    padding: 5px 10px;
+    overflow: visible;
+    cursor: auto;
+    border-radius: 10px;
+    border-color: #20c997;
+    border-width: 1px;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.melog-input-label {
+    font-family: "Nanum Gothic";
+    color: black;
+    font-weight: normal;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.melog-input:focus {
+    outline: none;
+}
+
+.melog-textarea {
+    font-family: "Nanum Gothic";
+    color: black;
+    width: 100%;
+    padding: 5px 10px;
+    overflow: visible;
+    cursor: auto;
+    border-radius: 10px;
+    border-color: #20c997;
+    border-width: 1px;
+    resize: none;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.melog-textarea:focus {
+    outline: none;
 }

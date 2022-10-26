@@ -22,7 +22,7 @@ public class DocumentController {
     @GetMapping("/write")
     public String createForm(Model model) {
         model.addAttribute("form", new DocumentForm());
-        return "createWriteForm";
+        return "documents/documentWrite";
     }
 
     @PostMapping("/write")
@@ -34,7 +34,7 @@ public class DocumentController {
         );
 
         documentService.saveItem(document);
-        return "documents/documentWrite";
+        return "redirect:list";
     }
 
     @GetMapping("/list")
