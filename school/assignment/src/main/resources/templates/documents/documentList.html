@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header" />
+<head th:replace="fragments/header :: header"></head>
 <body>
 <div class="container">
-  <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+  <div th:replace="fragments/bodyHeader :: bodyHeader"></div>
   <div>
     <table class="table table-striped">
       <thead> <tr>
@@ -13,11 +13,14 @@
       <tbody>
 
       <tr th:each="document : ${documents}">
-        <td th:text="${document.title}"></td>
+        <td>
+          <a th:href="@{/view/{id} (id=${document.id})}" th:text="${document.title}" target="_blank" style="color: #20c997"></a>
+        </td>
+
         <td th:text="${document.writer}"></td>
-        <td th:text="${document.writeTime}"></td>
+        <td th:text="${#temporals.format(document.writeTime, 'yyyy-MM-dd')}"></td>
         <td th:text="${document.viewCount}"></td>
-        <td><a href="제목" th:href="@{/view/{id} (id=${document.id})}" class="btn btn-primary" role="button">자세히 보기</a></td>
+<!--        <td><a href="제목" th:href="@{/view/{id} (id=${document.id})}" class="btn btn-primary" role="button">자세히 보기</a></td>-->
       </tr>
       </tbody>
     </table>

@@ -34,7 +34,7 @@ public class DocumentController {
         );
 
         documentService.saveItem(document);
-        return "list";
+        return "documents/documentWrite";
     }
 
     @GetMapping("/list")

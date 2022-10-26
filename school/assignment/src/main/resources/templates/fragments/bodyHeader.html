@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<header>
+
+</header>
 <div class="header" th:fragment="bodyHeader">
-    <a href="/"><h3 class="text-muted">DELOG</h3></a>
+    <link rel="stylesheet" href="css/style.css">
+    <button class="melog-button" style="float: right" onclick="location.href='/write'">글 쓰기</button>
+    <h3 class="melog-title">Melog</h3>
 </div>

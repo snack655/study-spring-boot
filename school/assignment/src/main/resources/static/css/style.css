@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'ef_diary';
+    src: url("font/ef_diary.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: 'BinggraeSamanco-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/BinggraeSamanco-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.melog-title {
+    font-family: 'BinggraeSamanco-Bold';
+}
+
+.melog-button {
+    width: 75px;
+    height: 32px;
+    font-size: 13px;
+    font-family: "Nanum Gothic";
+    color: white;
+    text-align: center;
+    background: #20c997;
+    border-radius: 30px;
+    border: #00000000;
+}
