@@ -48,7 +48,8 @@ public class DocumentController {
     public String view(@PathVariable("documentId") Long documentId, Model model) {
         Document document = documentService.findOne(documentId);
         model.addAttribute("document",document);
-        return "documentView";
+        document.addViewCount();
+        return "documents/documentView";
     }
 
     @GetMapping("/update/{documentId}")

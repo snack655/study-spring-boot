@@ -81,3 +81,49 @@
 .melog-textarea:focus {
     outline: none;
 }
+
+.melog-view-title {
+    font-family: "Nanum Gothic";
+    color: black;
+    font-weight: bold;
+    width: 100%;
+    olor: black;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.melog-view-writer {
+    font-family: "Nanum Gothic";
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.melog-view-write-time {
+    font-family: "Nanum Gothic";
+    color: gray;
+    font-weight: normal;
+    font-size: 15px;
+    float: end;
+}
+
+.melog-view-content {
+    width: 100%;
+    font-family: "Nanum Gothic";
+    color: black;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+.melog-view-count {
+    font-family: "Nanum Gothic";
+    color: gray;
+    font-weight: normal;
+    font-size: 16px;
+    float: end;
+}
+
+.melog-content-div {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

@@ -3,9 +3,21 @@
 <head th:replace="fragments/header :: header"></head>
 <body>
 <div class="container">
-  <div th:replace="fragments/writeBodyHeader :: bodyHeader"></div>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <div th:replace="fragments/viewBodyHeader :: bodyHeader"/>
+
   <div>
+    <span class="melog-view-title">[[${document.title}]]</span>
+    <span class="melog-view-count">[[${document.viewCount}]]</span>
   </div>
+  <div style="margin-top: 20px">
+    <span class="melog-view-writer">[[${document.writer}]]</span>
+    <span class="melog-view-write-time">[[${#temporals.format(document.getWriteTime(), 'yyyy-MM-dd')}]]</span>
+  </div>
+  <div class="melog-content-div">
+    <span class="melog-view-content">[[${document.content}]]</span>
+  </div>
+
   <div th:replace="fragments/footer :: footer"/>
 </div> <!-- /container -->
 </body>
