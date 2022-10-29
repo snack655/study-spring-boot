@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -40,6 +43,7 @@ public class DocumentController {
     @GetMapping("/list")
     public String list(Model model) {
         List<Document> documents = documentService.findDocuments();
+        Collections.sort(documents);
         model.addAttribute("documents", documents);
         return "documents/documentList";
     }

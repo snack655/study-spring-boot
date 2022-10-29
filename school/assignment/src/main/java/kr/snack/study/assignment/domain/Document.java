@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Document {
+public class Document implements Comparable<Document> {
 
     @Id
     @GeneratedValue
@@ -41,4 +41,13 @@ public class Document {
         this.viewCount += 1;
     }
 
+    @Override
+    public int compareTo(Document document) {
+        if (document.writeTime.isAfter(writeTime)) {
+            return 1;
+        } else if (document.writeTime.isBefore(writeTime)) {
+            return -1;
+        }
+        return 0;
+    }
 }
