@@ -6,9 +6,12 @@ import kr.snack.study.assignment.service.DocumentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,15 +28,21 @@ public class DocumentController {
     }
 
     @PostMapping("/write")
-    public String create(DocumentForm form) {
-        Document document = Document.createDocument(
-                form.getTitle(),
-                form.getContent(),
-                form.getWriter()
-        );
+    public String create(@Valid DocumentForm form, BindingResult bindingResult) {
 
-        documentService.saveItem(document);
-        return "redirect:list";
+        if (bindingResult.hasErrors()) {
+            System.out.println("에러 발생");
+            return "documents/documentWrite";
+        } else {
+            Document document = Document.createDocument(
+                    form.getTitle(),
+                    form.getContent(),
+                    form.getWriter()
+            );
+
+            documentService.saveItem(document);
+            return "redirect:list";
+        }
     }
 
     @GetMapping("/list")

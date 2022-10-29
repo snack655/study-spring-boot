@@ -3,26 +3,29 @@
 <head th:replace="fragments/header :: header"></head>
 <body>
 <div class="container">
-  <link rel="stylesheet" th:href="@{/css/style.css}">
-  <div th:replace="fragments/viewBodyHeader :: bodyHeader"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <div th:replace="fragments/viewBodyHeader :: bodyHeader"/>
 
-  <div>
-    <span class="melog-view-title">[[${document.title}]]</span>
-    <span class="melog-view-count">[[${document.viewCount}]]명이 읽었어요!</span>
-  </div>
-  <div style="margin-top: 20px">
-    <span class="melog-view-writer">[[${document.writer}]]</span>
-    <span class="melog-view-write-time">[[${#temporals.format(document.getWriteTime(), 'yyyy-MM-dd')}]]</span>
-  </div>
-  <div class="melog-content-div">
-    <span class="melog-view-content">[[${document.content}]]</span>
-  </div>
-  <div>
-    <button class="melog-button" style="margin-bottom: 10px" onclick="location.href='/list'">목록</button>
-    <button class="melog-button" th:onclick="|location.href='@{/update/{documentId}(documentId=${document.id})}'|">수정</button>
-  </div>
+    <div>
+        <span class="melog-view-title">[[${document.title}]]</span>
+        <span class="melog-view-count">[[${document.viewCount}]]명이 읽었어요!</span>
+    </div>
+    <div style="margin-top: 5px">
+        <span class="melog-view-writer">[[${document.writer}]]</span>
+        <span class="melog-view-write-time">[[${#temporals.format(document.getWriteTime(), 'yyyy-MM-dd')}]]</span>
+    </div>
+    <hr style="color: #20c997"/>
+    <div class="melog-content-div">
+        <span class="melog-view-content">[[${document.content}]]</span>
+    </div>
+    <div>
+        <button class="melog-button" style="margin-bottom: 10px" onclick="location.href='/list'">목록</button>
+        <button class="melog-button" th:onclick="|location.href='@{/update/{documentId}(documentId=${document.id})}'|">
+            수정
+        </button>
+    </div>
 
-  <div th:replace="fragments/footer :: footer"/>
+    <div th:replace="fragments/footer :: footer"/>
 </div> <!-- /container -->
 </body>
 </html>

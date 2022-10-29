@@ -3,7 +3,6 @@ package kr.snack.study.assignment.repository;
 import kr.snack.study.assignment.domain.Document;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -30,4 +29,5 @@ public class DocumentRepository {
         return em.createQuery("select d from Document d", Document.class)
                 .getResultList();
     }
+
 }
