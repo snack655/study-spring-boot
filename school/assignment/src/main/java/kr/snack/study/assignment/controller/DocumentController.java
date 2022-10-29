@@ -7,13 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -74,14 +70,16 @@ public class DocumentController {
     }
 
     @PostMapping("/update/{documentId}")
-    public String updateDocument(@PathVariable String documentId, @ModelAttribute("form") DocumentForm form) {
+    public String updateDocument(@PathVariable String documentId, DocumentForm form) {
         documentService.updateDocument(
-                form.getId(),
+                Long.parseLong(documentId),
                 form.getTitle(),
                 form.getContent(),
                 form.getWriter()
         );
-        return "redirect:view";
+
+        return "redirect:/list";
     }
+
 }
 

@@ -5,7 +5,7 @@
 <div class="container">
   <link rel="stylesheet" th:href="@{/css/style.css}">
   <div th:replace="fragments/updateBodyHeader :: bodyHeader"/>
-  <form th:action="@{/update}" th:object="${form}" method="post">
+  <form th:action="@{/update/{documentId} (documentId=${form.id})}" th:object="${form}" method="post">
 
     <div class="form-group">
       <label th:for="title" class="melog-input-label">제목</label>
