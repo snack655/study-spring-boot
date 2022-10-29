@@ -70,7 +70,7 @@ public class DocumentController {
         form.setWriteTime(document.getWriteTime());
 
         model.addAttribute("form", form);
-        return "updateDocumentForm";
+        return "documents/documentUpdate";
     }
 
     @PostMapping("/update/{documentId}")

@@ -18,7 +18,8 @@
     <span class="melog-view-content">[[${document.content}]]</span>
   </div>
   <div>
-    <button class="melog-button" style="margin-bottom: 10px" onclick="location.href='/list'">목록으로</button>
+    <button class="melog-button" style="margin-bottom: 10px" onclick="location.href='/list'">목록</button>
+    <button class="melog-button" th:onclick="|location.href='@{/update/{documentId}(documentId=${document.id})}'|">수정</button>
   </div>
 
   <div th:replace="fragments/footer :: footer"/>
