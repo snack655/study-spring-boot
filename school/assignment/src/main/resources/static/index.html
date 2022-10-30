@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymleaf.org">
 <head th:replace="fragments/header :: header">
-    <title>Hello</title>
+    <title>Melog</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 
 <body>
 
 <div class="container">
-    <div th:replace="fragments/bodyHeader :: bodyHeader" />
-    <div class="jumbotron"> <h1>HELLO JPA</h1>
-        <p class="lead">게시물 보기</p> <p>
-            <a class="btn btn-lg btn-secondary" href="/list">게시물 보기</a>
+    <div th:replace="fragments/bodyHeader :: bodyHeader"></div>
+    <link rel="stylesheet" href="css/style.css">
+
+    <div>
+        <h1 class="melog-title">안녕하세요 2학년 3반 최민재입니다.</h1>
+        <p class="lead" style="font-family: 'Nanum Gothic'">아래 버튼을 눌러 수행평과 과제를 확인해 주세요!</p>
+
+        <button class="melog-button" onclick="location.href='/list'">과제보기</button>
+
     </div>
     <div th:replace="fragments/footer :: footer" />
 </div> <!-- /container -->

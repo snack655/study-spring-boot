@@ -9,49 +9,34 @@
 
         <div class="form-group">
             <label th:for="title" class="melog-input-label">제목</label>
-            <textarea name="title"
-                      rows="1" type="text"
+            <textarea rows="3" type="text"
                       th:field="*{title}"
                       class="melog-textarea"
-                      th:classappend="${#fields.hasErrors('title')} ? 'is-invalid'"
                       placeholder="제목을 입력하세요">
-
             </textarea>
+            <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="melog-error-text" style="float:bottom;">Incorrect data</p>
 
-            <div th:if="${#fields.hasErrors('title')}" class="invalid-feedback">
-                title에 에러 발생
-            </div>
         </div>
 
         <div class="form-group">
             <label th:for="content" class="melog-input-label" style="margin-top: 20px">내용</label>
-            <textarea
-                    id="content"
-                    name="content"
-                    type="text" rows="10"
-                    th:field="*{content}"
-                    class="melog-textarea"
-                    th:classappend="${#fields.hasErrors('content')} ? 'is-invalid'"
-                    placeholder="내용을 입력하세요">
+            <textarea type="text" rows="12"
+                      th:field="*{content}"
+                      class="melog-textarea"
+                      placeholder="내용을 입력하세요">
             </textarea>
-
-            <div th:if="${#fields.hasErrors('content')}" class="invalid-feedback">
-                content에 에러 발생
-            </div>
+            <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="melog-error-text" style="float: bottom">Incorrect data</p>
         </div>
 
         <div class="form-group">
             <label th:for="writer" class="melog-input-label" style="margin-top: 25px">저자</label>
-            <textarea rows="1" type="text"
-                      name="author"
+            <textarea rows="2"
+                      type="text"
                       th:field="*{writer}"
                       class="melog-textarea"
-                      th:classappend="${#fields.hasErrors('writer')} ? 'is-invalid'"
-                      placeholder="저자를 입력하세요"></textarea>
-
-            <div th:if="${#fields.hasErrors('writer')}" class="invalid-feedback">
-                writer에 에러 발생
-            </div>
+                      placeholder="저자를 입력하세요">
+            </textarea>
+            <p th:if="${#fields.hasErrors('writer')}" class="melog-error-text" th:errors="*{writer}" style="float: bottom">Incorrect data</p>
         </div>
 
         <button type="submit" class="melog-submit-button" style="margin-top: 70px">Submit</button>

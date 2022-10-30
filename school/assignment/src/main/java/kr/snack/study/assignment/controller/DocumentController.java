@@ -8,9 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
@@ -28,21 +28,20 @@ public class DocumentController {
     }
 
     @PostMapping("/write")
-    public String create(@Valid DocumentForm form, BindingResult bindingResult) {
+    public String create(@ModelAttribute("form") @Valid DocumentForm form, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            System.out.println("에러 발생");
             return "documents/documentWrite";
-        } else {
-            Document document = Document.createDocument(
-                    form.getTitle(),
-                    form.getContent(),
-                    form.getWriter()
-            );
-
-            documentService.saveItem(document);
-            return "redirect:list";
         }
+
+        Document document = Document.createDocument(
+                form.getTitle(),
+                form.getContent(),
+                form.getWriter()
+        );
+
+        documentService.saveItem(document);
+        return "redirect:list";
     }
 
     @GetMapping("/list")
@@ -79,7 +78,17 @@ public class DocumentController {
     }
 
     @PostMapping("/update/{documentId}")
-    public String updateDocument(@PathVariable String documentId, DocumentForm form) {
+    public String updateDocument(
+            @ModelAttribute("form") @Valid DocumentForm form,
+            BindingResult bindingResult,
+            Model model,
+            @PathVariable String documentId
+    ) {
+
+        if (bindingResult.hasErrors()) {
+            return "documents/documentUpdate";
+        }
+
         documentService.updateDocument(
                 Long.parseLong(documentId),
                 form.getTitle(),

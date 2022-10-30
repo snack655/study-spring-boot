@@ -2,6 +2,8 @@ package kr.snack.study.assignment.controller.form;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
@@ -11,16 +13,16 @@ public class DocumentForm {
 
     private Long id;
 
-    @NotEmpty(message = "제목은 필수입니다.")
-    @Size(max = 100, message = "내용은 최대 100 글자입니다.")
+    @NotBlank(message = "제목을 입력해 주세요.")
+    @Size(max = 100, message = "내용은 최대 100글자까지 입니다.")
     private String title;
 
-    @NotEmpty(message = "내용은 필수입니다.")
-    @Size(max = 1000, message = "내용은 최대 1000 글자입니다.")
+    @NotBlank(message = "내용을 입력해 주세요.")
+    @Size(max = 1000, message = "내용은 최대 1000글자까지 입니다.")
     private String content;
 
-    @NotEmpty(message = "작성자는 필수입니다.")
-    @Size(max = 50, message = "작성자는 최대 50 글자입니다.")
+    @NotBlank(message = "저자를 입력해 주세요.")
+    @Size(max = 50, message = "저자는 최대 50글자까지 입니다.")
     private String writer;
 
     private int viewCount;

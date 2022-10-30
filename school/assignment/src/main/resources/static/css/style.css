@@ -107,6 +107,14 @@
     float: end;
 }
 
+.melog-error-text {
+    font-family: "Nanum Gothic";
+    color: red;
+    font-weight: normal;
+    font-size: 12px;
+    float: bottom;
+}
+
 .melog-view-content {
     width: 100%;
     font-family: "Nanum Gothic";
