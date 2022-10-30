@@ -36,4 +36,8 @@ public class DocumentService {
         return documentRepository.findOne(documentId);
     }
 
+    public void deleteDocument(Long documentId) {
+        documentRepository.delete(documentId);
+    }
+
 }

@@ -2,9 +2,7 @@ package kr.snack.study.assignment.controller.form;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 

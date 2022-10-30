@@ -30,4 +30,9 @@ public class DocumentRepository {
                 .getResultList();
     }
 
+    public void delete(Long id) {
+        Document document = findOne(id);
+        em.remove(document);
+    }
+
 }
