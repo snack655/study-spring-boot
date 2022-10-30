@@ -3,14 +3,13 @@ package kr.snack.study.assignment.controller;
 import kr.snack.study.assignment.controller.form.DocumentForm;
 import kr.snack.study.assignment.domain.Document;
 import kr.snack.study.assignment.service.DocumentService;
+import kr.snack.study.assignment.service.DocumentServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
@@ -21,14 +20,25 @@ public class DocumentController {
 
     private final DocumentService documentService;
 
+    /**
+     * 문서 폼을 받아와서 띄워줍니다.
+     * @param model
+     * @return write
+     */
     @GetMapping("/write")
     public String createForm(Model model) {
         model.addAttribute("form", new DocumentForm());
         return "documents/documentWrite";
     }
 
+    /**
+     * 폼에 따라서 문서를 생성합니다.
+     * @param form
+     * @param bindingResult
+     * @return redirect list
+     */
     @PostMapping("/write")
-    public String create(@ModelAttribute("form") @Valid DocumentForm form, BindingResult bindingResult, Model model) {
+    public String create(@ModelAttribute("form") @Valid DocumentForm form, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "documents/documentWrite";
@@ -44,6 +54,12 @@ public class DocumentController {
         return "redirect:list";
     }
 
+    /**
+     * 문서 리스트로 보기
+     * sort를 통해서 문서를 최신순으로 정렬
+     * @param model
+     * @return list
+     */
     @GetMapping("/list")
     public String list(Model model) {
         List<Document> documents = documentService.findDocuments();
@@ -52,6 +68,12 @@ public class DocumentController {
         return "documents/documentList";
     }
 
+    /**
+     * 문서 자세히 보기
+     * @param documentId
+     * @param model
+     * @return view
+     */
     @GetMapping("/view/{documentId}")
     public String view(@PathVariable("documentId") Long documentId, Model model) {
         Document document = documentService.findOne(documentId);
@@ -61,6 +83,12 @@ public class DocumentController {
         return "documents/documentView";
     }
 
+    /**
+     * 문서 업데이트 폼을 가져옴
+     * @param documentId
+     * @param model
+     * @return update
+     */
     @GetMapping("/update/{documentId}")
     public String updateDocumentForm(@PathVariable("documentId") Long documentId, Model model) {
         Document document = documentService.findOne(documentId);
@@ -77,16 +105,22 @@ public class DocumentController {
         return "documents/documentUpdate";
     }
 
+    /**
+     * 문서를 수정된 폼에 따라 업데이트 함
+     * @param form
+     * @param bindingResult
+     * @param documentId
+     * @return list
+     */
     @PostMapping("/update/{documentId}")
     public String updateDocument(
             @ModelAttribute("form") @Valid DocumentForm form,
             BindingResult bindingResult,
-            Model model,
             @PathVariable String documentId
     ) {
 
         if (bindingResult.hasErrors()) {
-            return "documents/documentUpdate";
+            return "redirect:/update/"+documentId;
         }
 
         documentService.updateDocument(
@@ -97,6 +131,15 @@ public class DocumentController {
         );
 
         return "redirect:/list";
+    }
+
+    /**
+     * 문서 삭제
+     * @param documentId
+     */
+    @DeleteMapping("/delete/{documentId}")
+    public @ResponseBody void deleteDocument(@PathVariable Long documentId) {
+        documentService.deleteDocument(documentId);
     }
 
 }

@@ -27,5 +27,4 @@ public class DocumentForm {
 
     private LocalDateTime writeTime;
 
-
 }

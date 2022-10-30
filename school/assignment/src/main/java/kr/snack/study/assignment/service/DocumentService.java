@@ -1,43 +1,42 @@
 package kr.snack.study.assignment.service;
 
 import kr.snack.study.assignment.domain.Document;
-import kr.snack.study.assignment.repository.DocumentRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
-@Transactional(readOnly = true)
-@RequiredArgsConstructor
-public class DocumentService {
+public interface DocumentService {
 
-    private final DocumentRepository documentRepository;
+    /**
+     * 문서를 저장하는 함수
+     * @param document
+     */
+    void saveItem(Document document);
 
-    @Transactional
-    public Long saveItem(Document document) {
-        return documentRepository.save(document);
-    }
+    /**
+     * 문서를 파라미터에 맞춰서 업데이트 합니다.
+     * @param documentId
+     * @param title
+     * @param content
+     * @param writer
+     */
+    void updateDocument(Long documentId, String title, String content, String writer);
 
-    @Transactional
-    public void updateDocument(Long documentId, String title, String content, String writer) {
-        Document findDocument = documentRepository.findOne(documentId);
-        findDocument.setTitle(title);
-        findDocument.setContent(content);
-        findDocument.setWriter(writer);
-    }
+    /**
+     * 모든 문서를 조회합니다.
+     * @return List<Document>
+     */
+    List<Document> findDocuments();
 
-    public List<Document> findDocuments() {
-        return documentRepository.findAll();
-    }
+    /**
+     * 아이디에 맞는 문서를 조회합니다.
+     * @param documentId
+     * @return Document
+     */
+    Document findOne(Long documentId);
 
-    public Document findOne(Long documentId) {
-        return documentRepository.findOne(documentId);
-    }
-
-    public void deleteDocument(Long documentId) {
-        documentRepository.delete(documentId);
-    }
-
+    /**
+     * 문서를 삭제하는 함수.
+     * @param documentId
+     */
+    void deleteDocument(Long documentId);
 }

@@ -1,38 +1,16 @@
 package kr.snack.study.assignment.repository;
 
 import kr.snack.study.assignment.domain.Document;
-import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-@RequiredArgsConstructor
-public class DocumentRepository {
+public interface DocumentRepository extends JpaRepository<Document, Long> {
 
-    private final EntityManager em;
+    List<Document> findAll();
 
-    public Long save(Document document) {
-        if (document.getId() == null) {
-            em.persist(document);
-        } else {
-            em.merge(document);
-        }
-        return document.getId();
-    }
-
-    public Document findOne(Long id) {
-        return em.find(Document.class, id);
-    }
-
-    public List<Document> findAll() {
-        return em.createQuery("select d from Document d", Document.class)
-                .getResultList();
-    }
-
-    public void delete(Long id) {
-        Document document = findOne(id);
-        em.remove(document);
-    }
+    Optional<Document> findById(Long id);
 
 }

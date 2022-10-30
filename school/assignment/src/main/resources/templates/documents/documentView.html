@@ -20,12 +20,25 @@
     </div>
     <div>
         <button class="melog-button" style="margin-bottom: 10px" onclick="location.href='/list'">목록</button>
-        <button class="melog-button" th:onclick="|location.href='@{/update/{documentId}(documentId=${document.id})}'|">
-            수정
-        </button>
+        <button class="melog-button" th:onclick="|location.href='@{/update/{documentId}(documentId=${document.id})}'|">수정</button>
+        <button class="melog-button" onclick="deleteDocument()">삭제</button>
     </div>
 
     <div th:replace="fragments/footer :: footer"/>
 </div> <!-- /container -->
 </body>
+
+
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script>
+    function deleteDocument() {
+        const id = [[${document.getId()}]];
+        console.log(id);
+
+        $.ajax({url:`/delete/${id}`, type: 'DELETE'}).then(res => {
+            alert('성공적으로 삭제되었습니다')
+            window.location.href = '/list'
+        });
+    }
+</script>
 </html>

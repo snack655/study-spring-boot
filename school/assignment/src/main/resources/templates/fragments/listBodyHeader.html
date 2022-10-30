@@ -4,7 +4,7 @@
 
 </header>
 <div class="header" th:fragment="bodyHeader">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <button class="melog-button" style="float: right" onclick="location.href='/write'">글 쓰기</button>
     <h3 class="melog-title">Melog</h3>
 </div>

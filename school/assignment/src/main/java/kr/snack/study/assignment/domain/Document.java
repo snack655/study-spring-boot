@@ -29,6 +29,13 @@ public class Document implements Comparable<Document> {
     private int viewCount;
     private LocalDateTime writeTime;
 
+    /**
+     * 파라미터에 맞는 Document 객체를 만들어 반환하는 함수입니다.
+     * @param title
+     * @param content
+     * @param writer
+     * @return document
+     */
     public static Document createDocument(String title, String content, String writer) {
         Document document = new Document();
         document.setTitle(title);
@@ -39,10 +46,19 @@ public class Document implements Comparable<Document> {
         return document;
     }
 
+    /**
+     * 조회수를 올려주는 함수
+     */
     public void addViewCount() {
         this.viewCount += 1;
     }
 
+    /**
+     * 문서를 정렬해 주는 함수입니다.
+     * 정렬의 기준은 writeTime 입니다.
+     * @param document
+     * @return 1 or -1
+     */
     @Override
     public int compareTo(Document document) {
         if (document.writeTime.isAfter(writeTime)) {
