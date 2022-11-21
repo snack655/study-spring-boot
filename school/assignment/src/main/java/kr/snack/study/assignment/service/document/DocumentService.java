@@ -1,4 +1,4 @@
-package kr.snack.study.assignment.service;
+package kr.snack.study.assignment.service.document;
 
 import kr.snack.study.assignment.domain.Document;
 
@@ -10,7 +10,7 @@ public interface DocumentService {
      * 문서를 저장하는 함수
      * @param document
      */
-    void saveItem(Document document);
+    void saveDocument(Document document);
 
     /**
      * 문서를 파라미터에 맞춰서 업데이트 합니다.

@@ -1,4 +1,4 @@
-package kr.snack.study.assignment.service;
+package kr.snack.study.assignment.service.document;
 
 import kr.snack.study.assignment.domain.Document;
 import kr.snack.study.assignment.repository.DocumentRepository;
@@ -17,7 +17,7 @@ public class DocumentServiceImpl implements DocumentService {
     private final DocumentRepository documentRepository;
 
     @Transactional
-    public void saveItem(Document document) {
+    public void saveDocument(Document document) {
         documentRepository.save(document);
     }
 

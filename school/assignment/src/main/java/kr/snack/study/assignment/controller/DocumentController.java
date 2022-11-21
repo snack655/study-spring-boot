@@ -2,8 +2,7 @@ package kr.snack.study.assignment.controller;
 
 import kr.snack.study.assignment.controller.form.DocumentForm;
 import kr.snack.study.assignment.domain.Document;
-import kr.snack.study.assignment.service.DocumentService;
-import kr.snack.study.assignment.service.DocumentServiceImpl;
+import kr.snack.study.assignment.service.document.DocumentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,7 +49,7 @@ public class DocumentController {
                 form.getWriter()
         );
 
-        documentService.saveItem(document);
+        documentService.saveDocument(document);
         return "redirect:list";
     }
 
@@ -79,7 +78,7 @@ public class DocumentController {
         Document document = documentService.findOne(documentId);
         model.addAttribute("document",document);
         document.addViewCount();
-        documentService.saveItem(document);
+        documentService.saveDocument(document);
         return "documents/documentView";
     }
 
