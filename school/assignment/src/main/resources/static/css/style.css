@@ -21,6 +21,19 @@
     border: #00000000;
 }
 
+.melog-login-button {
+    width: 75px;
+    height: 32px;
+    font-size: 13px;
+    font-family: "Nanum Gothic";
+    color: white;
+    margin-right: 10px;
+    text-align: center;
+    background: #20c997;
+    border-radius: 30px;
+    border: #00000000;
+}
+
 .melog-submit-button {
     width: 75px;
     height: 32px;

@@ -1,6 +1,6 @@
 package kr.snack.study.assignment.repository;
 
-import kr.snack.study.assignment.domain.Document;
+import kr.snack.study.assignment.domain.entity.Document;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;

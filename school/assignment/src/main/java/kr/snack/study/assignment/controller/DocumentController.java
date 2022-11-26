@@ -1,7 +1,7 @@
 package kr.snack.study.assignment.controller;
 
 import kr.snack.study.assignment.controller.form.DocumentForm;
-import kr.snack.study.assignment.domain.Document;
+import kr.snack.study.assignment.domain.entity.Document;
 import kr.snack.study.assignment.service.document.DocumentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

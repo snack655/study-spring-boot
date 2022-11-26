@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"></head>
+<body>
+<div class="container">
+    <div th:replace="fragments/registerBodyHeader :: bodyHeader"></div>
+    <div>
+        <form method="post" action="/user/register">
+            <div class="mb-3">
+                <label for="id" class="melog-input-label">id</label>
+                <input type="text" class="melog-textarea" id="id" name="id" placeholder="id">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="melog-input-label">password</label>
+                <input type="password" class="melog-textarea" id="password" name="password" placeholder="password">
+            </div>
+            <div class="mb-3">
+                <label for="name" class="melog-input-label">name</label>
+                <input type="text" class="melog-textarea" id="name" name="name" placeholder="name">
+            </div>
+            <div class="d-flex justify-content-center p-3">
+                <input class="melog-button" type="submit" value="회원가입">
+            </div>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        </form>
+    </div>
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+</html>

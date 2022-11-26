@@ -1,6 +1,6 @@
 package kr.snack.study.assignment.service.document;
 
-import kr.snack.study.assignment.domain.Document;
+import kr.snack.study.assignment.domain.entity.Document;
 
 import java.util.List;
 

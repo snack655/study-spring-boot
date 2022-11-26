@@ -1,6 +1,6 @@
 package kr.snack.study.assignment.service.member;
 
-import kr.snack.study.assignment.domain.Member;
+import kr.snack.study.assignment.domain.entity.Member;
 
 import java.util.List;
 

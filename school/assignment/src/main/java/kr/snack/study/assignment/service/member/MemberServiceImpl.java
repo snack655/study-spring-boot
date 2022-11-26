@@ -1,6 +1,6 @@
 package kr.snack.study.assignment.service.member;
 
-import kr.snack.study.assignment.domain.Member;
+import kr.snack.study.assignment.domain.entity.Member;
 import kr.snack.study.assignment.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

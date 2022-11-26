@@ -1,9 +1,11 @@
 package kr.snack.study.assignment.controller;
 
-import kr.snack.study.assignment.controller.form.MemberForm;
-import kr.snack.study.assignment.domain.Member;
+import kr.snack.study.assignment.controller.form.LoginForm;
+import kr.snack.study.assignment.controller.form.RegisterForm;
+import kr.snack.study.assignment.domain.entity.Member;
 import kr.snack.study.assignment.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,27 +20,41 @@ import javax.validation.Valid;
 public class MemberController {
 
     private final MemberService memberService;
+    private final PasswordEncoder passwordEncoder;
 
-    @GetMapping("/login")
+    @GetMapping("/user/login")
     public String loginForm(Model model) {
-        model.addAttribute("form", new MemberForm());
-        return "member/login";
+        model.addAttribute("form", new LoginForm());
+        return "members/login";
     }
 
-    @PostMapping("/login")
-    public String login(@ModelAttribute("form") @Valid MemberForm form, BindingResult bindingResult) {
+    @PostMapping("/user/login")
+    public String login(@ModelAttribute("form") @Valid LoginForm form, BindingResult bindingResult) {
 
-        if (bindingResult.hasErrors()) {
-            return "redirect:login";
-        }
+
+
+        return "documents/documentList";
+    }
+
+    @GetMapping("/user/register")
+    public String registerForm(Model model) {
+        model.addAttribute("form", new RegisterForm());
+        return "members/register";
+    }
+
+    @PostMapping("/user/register")
+    public String register(@ModelAttribute("form") @Valid RegisterForm form, BindingResult bindingResult) {
+        System.out.println(form);
 
         Member member = Member.createMember(
-                form.getEmail(),
-                form.getPassword()
+                form.getId(),
+                passwordEncoder.encode(form.getPassword()),
+                form.getName()
         );
 
         memberService.saveMember(member);
-        return "documents/documentList";
+
+        return "redirect:/user/login";
     }
 
 

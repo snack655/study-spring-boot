@@ -1,4 +1,4 @@
-package kr.snack.study.assignment.domain;
+package kr.snack.study.assignment.domain.entity;
 
 import lombok.AccessLevel;
 import lombok.Getter;
