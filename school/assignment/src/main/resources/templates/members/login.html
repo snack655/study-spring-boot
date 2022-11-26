@@ -5,14 +5,14 @@
 <div class="container">
     <div th:replace="fragments/loginBodyHeader :: bodyHeader"></div>
     <div>
-        <form method="post" action="/members/login">
+        <form method="post" action="/user/login">
             <div class="mb-3">
                 <label for="id" class="melog-input-label">id</label>
                 <input type="text" class="melog-textarea" id="id" name="id" placeholder="id">
             </div>
             <div class="mb-3">
                 <label for="password" class="melog-input-label">password</label>
-                <input type="text" class="melog-textarea" id="password" name="password" placeholder="password">
+                <input type="password" class="melog-textarea" id="password" name="password" placeholder="password">
             </div>
             <div class="d-flex justify-content-center p-3">
                 <input class="melog-button" type="submit" value="로그인">

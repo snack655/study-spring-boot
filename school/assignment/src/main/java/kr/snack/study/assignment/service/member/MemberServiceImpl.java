@@ -27,14 +27,23 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Member findOne(Long memberId) {
+    public Member findOne(String memberId) {
         return memberRepository.findById(memberId)
                 .orElseThrow();
     }
 
     @Override
     @Transactional
-    public void deleteMember(Long memberId) {
+    public void deleteMember(String memberId) {
         memberRepository.deleteById(memberId);
     }
+
+//    @Override
+//    public Boolean login(Member member) {
+//        Member dbMember = memberRepository.findById(member.getId()).orElseThrow();
+//
+//        System.out.println("로그인 확인 : " + dbMember.getPassword() + " - " +  member.getPassword());
+//
+//        return dbMember.getPassword().equals(member.getPassword());
+//    }
 }

@@ -10,8 +10,10 @@ public interface MemberService {
 
     List<Member> findMembers();
 
-    Member findOne(Long memberId);
+    Member findOne(String memberId);
 
-    void deleteMember(Long memberId);
+    void deleteMember(String memberId);
+
+    //Boolean login(Member member);
 
 }

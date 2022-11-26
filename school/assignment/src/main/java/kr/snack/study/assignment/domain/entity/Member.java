@@ -30,4 +30,12 @@ public class Member {
         return member;
     }
 
+    public static Member createMember(String id, String password) {
+        Member member = new Member();
+        member.setId(id);
+        member.setPassword(password);
+        member.setName("");
+        return member;
+    }
+
 }

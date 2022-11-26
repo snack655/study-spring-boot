@@ -28,13 +28,23 @@ public class MemberController {
         return "members/login";
     }
 
-    @PostMapping("/user/login")
+/*    @PostMapping("/user/login")
     public String login(@ModelAttribute("form") @Valid LoginForm form, BindingResult bindingResult) {
+        Member member = Member.createMember(
+                form.getId(),
+                passwordEncoder.encode(form.getPassword())
+        );
 
-
-
-        return "documents/documentList";
-    }
+        try {
+            if (memberService.login(member)) {
+                return "redirect:/list";
+            } else {
+                return "members/login";
+            }
+        } catch (NoSuchElementException e) {
+            return "members/login";
+        }
+    }*/
 
     @GetMapping("/user/register")
     public String registerForm(Model model) {

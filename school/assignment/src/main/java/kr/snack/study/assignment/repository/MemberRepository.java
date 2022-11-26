@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface MemberRepository extends JpaRepository<Member, Long> {
+public interface MemberRepository extends JpaRepository<Member, String> {
 
     List<Member> findAll();
 
-    Optional<Member> findById(Long id);
+    Optional<Member> findById(String id);
 
 }
