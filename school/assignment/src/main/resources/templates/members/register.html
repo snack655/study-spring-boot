@@ -21,7 +21,6 @@
             <div class="d-flex justify-content-center p-3">
                 <input class="melog-button" type="submit" value="회원가입">
             </div>
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         </form>
     </div>
     <div th:replace="fragments/footer :: footer"/>

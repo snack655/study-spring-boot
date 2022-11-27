@@ -8,6 +8,8 @@ public interface MemberService {
 
     void saveMember(Member member);
 
+    Member login(String memberId, String password);
+
     List<Member> findMembers();
 
     Member findOne(String memberId);

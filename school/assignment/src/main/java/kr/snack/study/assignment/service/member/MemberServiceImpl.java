@@ -1,6 +1,7 @@
 package kr.snack.study.assignment.service.member;
 
 import kr.snack.study.assignment.domain.entity.Member;
+import kr.snack.study.assignment.exception.MemberNotFoundException;
 import kr.snack.study.assignment.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,12 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public void saveMember(Member member) {
         memberRepository.save(member);
+    }
+
+    @Override
+    public Member login(String memberId, String password) {
+        return memberRepository.findByIdAndPassword(memberId, password)
+                .orElseThrow(() -> MemberNotFoundException.EXCEPTION);
     }
 
     @Override

@@ -10,8 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
-    @Id
-    private String id;
+    @Id private String id;
     private String password;
     private String name;
 
@@ -27,14 +26,6 @@ public class Member {
         member.setId(id);
         member.setPassword(password);
         member.setName(name);
-        return member;
-    }
-
-    public static Member createMember(String id, String password) {
-        Member member = new Member();
-        member.setId(id);
-        member.setPassword(password);
-        member.setName("");
         return member;
     }
 

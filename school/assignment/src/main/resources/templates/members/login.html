@@ -15,12 +15,17 @@
                 <input type="password" class="melog-textarea" id="password" name="password" placeholder="password">
             </div>
             <div class="d-flex justify-content-center p-3">
-                <input class="melog-button" type="submit" value="로그인">
+                <input id="login-btn" class="melog-button" type="submit" value="로그인" onclick="loginClick()">
             </div>
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         </form>
     </div>
     <div th:replace="fragments/footer :: footer"/>
+<!--    <script>
+        const login = document.getElementById("login-btn");
+        function loginClick() {
+            alert("하이하");
+        }
+    </script>-->
 </div> <!-- /container -->
 </body>
 </html>
