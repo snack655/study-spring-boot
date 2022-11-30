@@ -1,43 +1,71 @@
-//package kr.snack.study.assignment.config;
-//
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.config.annotation.web.builders.WebSecurity;
-////import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.crypto.password.PasswordEncoder;
-//import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-//
-//@Configuration
-//@EnableWebSecurity
-//public class SecurityConfig {
-////
-////    @Override
-////    protected void configure(HttpSecurity http) throws Exception {
-////        http.formLogin()
-////                .loginPage("/user/login")
-////                .defaultSuccessUrl("/list")
-////                .usernameParameter("id")
-////                .passwordParameter("password")
-////                .failureUrl("/user/login")
-////                .and()
-////                .logout()
-////                .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
-////                .logoutSuccessUrl("/");
-////
-////        http.authorizeRequests()
-////                .mvcMatchers("/css/**", "/js/**", "/img/**").permitAll()
-////                .mvcMatchers("/", "h2-console/**", "/user/**", "/list", "/view/**").permitAll()
-////                .mvcMatchers("/admin/**").hasRole("ADMIN")
-////                .anyRequest().authenticated();
-////    }
-////
-////    @Override
-////    public void configure(WebSecurity web) throws Exception {
-////        web.ignoring()
-////                .antMatchers("h2-console/**");
-////    }
-////
-//}
+package kr.snack.study.assignment.config;
+
+import kr.snack.study.assignment.config.principal.PrincipalDetailService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final PrincipalDetailService principalDetailService;
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/css/**", "/js/**", "/fonts/**", "/images/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/list").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers(HttpMethod.GET, "/view/**").permitAll()
+                .antMatchers("/user/**").permitAll()
+                .anyRequest().authenticated();
+
+        http.csrf().disable();
+
+        http.formLogin()
+                .loginPage("/user/login")
+                .defaultSuccessUrl("/list")
+                .usernameParameter("id")
+                .permitAll();
+
+        http.logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+                .logoutSuccessUrl("/list")
+                .invalidateHttpSession(true);
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(principalDetailService)
+                .passwordEncoder(passwordEncoder());
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+                .antMatchers("h2-console/**");
+    }
+
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+}

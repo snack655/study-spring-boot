@@ -100,9 +100,23 @@
     color: black;
     font-weight: bold;
     width: 100%;
-    olor: black;
-    font-weight: bold;
     font-size: 30px;
+}
+
+.melog-name {
+    font-family: "BinggraeSamanco-Bold";
+    color: black;
+    font-weight: bold;
+    margin-right: 5px;
+    font-size: 30px;
+}
+
+.melog-welcome {
+    font-family: "Nanum Gothic";
+    color: black;
+    font-weight: normal;
+    margin-right: 5px;
+    font-size: 25px;
 }
 
 .melog-view-writer {

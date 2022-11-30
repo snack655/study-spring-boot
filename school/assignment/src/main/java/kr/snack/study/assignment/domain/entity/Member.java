@@ -5,13 +5,17 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Getter @Setter
-@ToString
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
-    @Id private String id;
+    @Id
+    private String id;
+
+    @Column(nullable = false, length = 500)
     private String password;
+
+    @Column(nullable = false)
     private String name;
 
     /**
@@ -21,12 +25,11 @@ public class Member {
      * @param name 사용자 이름
      * @return 만들어진 Member 객체 반환
      */
-    public static Member createMember(String id, String password, String name) {
-        Member member = new Member();
-        member.setId(id);
-        member.setPassword(password);
-        member.setName(name);
-        return member;
+    @Builder
+    public Member(String id, String password, String name) {
+        this.id = id;
+        this.password = password;
+        this.name = name;
     }
 
 }

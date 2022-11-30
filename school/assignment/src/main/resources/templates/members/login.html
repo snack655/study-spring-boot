@@ -12,20 +12,21 @@
             </div>
             <div class="mb-3">
                 <label for="password" class="melog-input-label">password</label>
-                <input type="password" class="melog-textarea" id="password" name="password" placeholder="password">
+                <input type="password" class="melog-textarea" id="password" name="password" placeholder="password" required>
             </div>
             <div class="d-flex justify-content-center p-3">
-                <input id="login-btn" class="melog-button" type="submit" value="로그인" onclick="loginClick()">
+                <input
+                        id="login-btn" class="melog-button" type="submit" value="로그인" required>
             </div>
         </form>
     </div>
     <div th:replace="fragments/footer :: footer"/>
-<!--    <script>
-        const login = document.getElementById("login-btn");
-        function loginClick() {
-            alert("하이하");
-        }
-    </script>-->
+    <!--    <script>
+            const login = document.getElementById("login-btn");
+            function loginClick() {
+                alert("하이하");
+            }
+        </script>-->
 </div> <!-- /container -->
 </body>
 </html>
