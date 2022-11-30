@@ -1,5 +1,7 @@
 package kr.snack.study.assignment.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import kr.snack.study.assignment.config.jwt.JwtTokenParser;
 import kr.snack.study.assignment.config.principal.PrincipalDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +23,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PrincipalDetailService principalDetailService;
+    private final JwtTokenParser jwtTokenParser;
+    private final ObjectMapper objectMapper;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

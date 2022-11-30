@@ -1,11 +1,12 @@
 package kr.snack.study.assignment.exception;
 
+import kr.snack.study.assignment.exception.token.MemberErrorCode;
 import org.springframework.http.HttpStatus;
 
 public class MemberNotFoundException extends CustomException {
 
     private MemberNotFoundException() {
-        super(HttpStatus.NOT_FOUND, "등록되지 않은 아이디입니다");
+        super(MemberErrorCode.USER_NOT_FOUND);
     }
 
     public static final CustomException EXCEPTION = new MemberNotFoundException();
