@@ -7,7 +7,7 @@
   <div>
     <table class="table table-striped">
       <thead> <tr>
-        <th>제목</th> <th>글쓴이</th> <th>글 쓴 시간</th> <th>조회수</th>
+        <th>제목</th> <th>아이디</th> <th>글쓴이</th> <th>글 쓴 시간</th> <th>조회수</th>
       </tr>
       </thead>
       <tbody>
@@ -17,6 +17,7 @@
           <a th:href="@{/view/{id} (id=${document.id})}" th:text="${document.title}" target="_blank" style="color: #20c997"></a>
         </td>
 
+        <td th:text="${document.writerId}"></td>
         <td th:text="${document.writer}"></td>
         <td th:text="${#temporals.format(document.writeTime, 'yyyy-MM-dd')}"></td>
         <td th:text="${document.viewCount}"></td>

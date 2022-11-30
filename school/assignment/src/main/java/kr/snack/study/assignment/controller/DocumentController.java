@@ -2,13 +2,17 @@ package kr.snack.study.assignment.controller;
 
 import kr.snack.study.assignment.controller.form.DocumentForm;
 import kr.snack.study.assignment.domain.entity.Document;
+import kr.snack.study.assignment.domain.entity.Member;
+import kr.snack.study.assignment.domain.facade.MemberFacade;
 import kr.snack.study.assignment.service.document.DocumentService;
+import kr.snack.study.assignment.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
@@ -18,6 +22,7 @@ import java.util.List;
 public class DocumentController {
 
     private final DocumentService documentService;
+    private final MemberFacade memberFacade;
 
     /**
      * 문서 폼을 받아와서 띄워줍니다.
@@ -37,7 +42,13 @@ public class DocumentController {
      * @return redirect list
      */
     @PostMapping("/write")
-    public String create(@ModelAttribute("form") @Valid DocumentForm form, BindingResult bindingResult) {
+    public String create(
+            @ModelAttribute("form") @Valid DocumentForm form,
+            BindingResult bindingResult,
+            HttpServletRequest request
+    ) {
+
+        Member member = memberFacade.getCurrentMember();
 
         if (bindingResult.hasErrors()) {
             return "documents/documentWrite";
@@ -46,7 +57,8 @@ public class DocumentController {
         Document document = Document.createDocument(
                 form.getTitle(),
                 form.getContent(),
-                form.getWriter()
+                member.getName(),
+                member.getId()
         );
 
         documentService.saveDocument(document);
@@ -96,7 +108,7 @@ public class DocumentController {
         form.setId(document.getId());
         form.setTitle(document.getTitle());
         form.setContent(document.getContent());
-        form.setWriter(document.getWriter());
+        //form.setWriter(document.getWriter());
         form.setViewCount(document.getViewCount());
         form.setWriteTime(document.getWriteTime());
 
@@ -118,6 +130,8 @@ public class DocumentController {
             @PathVariable String documentId
     ) {
 
+        Member member = memberFacade.getCurrentMember();
+
         if (bindingResult.hasErrors()) {
             return "redirect:/update/"+documentId;
         }
@@ -126,7 +140,7 @@ public class DocumentController {
                 Long.parseLong(documentId),
                 form.getTitle(),
                 form.getContent(),
-                form.getWriter()
+                member.getName()
         );
 
         return "redirect:/list";

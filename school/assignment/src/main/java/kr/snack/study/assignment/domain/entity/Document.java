@@ -26,6 +26,7 @@ public class Document implements Comparable<Document> {
     private String content;
 
     private String writer;
+    private String writerId;
     private int viewCount;
     private LocalDateTime writeTime;
 
@@ -36,11 +37,12 @@ public class Document implements Comparable<Document> {
      * @param writer
      * @return document
      */
-    public static Document createDocument(String title, String content, String writer) {
+    public static Document createDocument(String title, String content, String writer, String writerId) {
         Document document = new Document();
         document.setTitle(title);
         document.setContent(content);
         document.setWriter(writer);
+        document.setWriterId(writerId);
         document.setViewCount(0);
         document.setWriteTime(LocalDateTime.now());
         return document;

@@ -19,9 +19,9 @@ public class DocumentForm {
     @Size(max = 1000, message = "내용은 최대 1000글자까지 입니다.")
     private String content;
 
-    @NotBlank(message = "저자를 입력해 주세요.")
-    @Size(max = 50, message = "저자는 최대 50글자까지 입니다.")
-    private String writer;
+//    @NotBlank(message = "저자를 입력해 주세요.")
+//    @Size(max = 50, message = "저자는 최대 50글자까지 입니다.")
+//    private String writer;
 
     private int viewCount;
 

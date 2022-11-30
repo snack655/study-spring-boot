@@ -1,7 +1,6 @@
 package kr.snack.study.assignment.exception;
 
 import kr.snack.study.assignment.exception.token.MemberErrorCode;
-import org.springframework.http.HttpStatus;
 
 public class MemberNotFoundException extends CustomException {
 

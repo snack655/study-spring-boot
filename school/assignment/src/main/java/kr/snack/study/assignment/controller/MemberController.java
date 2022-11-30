@@ -1,22 +1,19 @@
 package kr.snack.study.assignment.controller;
 
-import kr.snack.study.assignment.controller.form.DocumentForm;
 import kr.snack.study.assignment.controller.form.LoginForm;
 import kr.snack.study.assignment.controller.form.RegisterForm;
-import kr.snack.study.assignment.domain.entity.Member;
-import kr.snack.study.assignment.exception.MemberNotFoundException;
 import kr.snack.study.assignment.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 @Controller
 @RequiredArgsConstructor
@@ -32,10 +29,15 @@ public class MemberController {
 
     @PostMapping("/user/login")
     public String login(
-            @ModelAttribute("form") @Valid LoginForm form
+            @ModelAttribute("form") @Valid LoginForm form,
+            HttpServletResponse response
     ) {
-        memberService.login(form);
-        return "documents/documentList";
+        String token = memberService.login(form);
+        Cookie cookie = new Cookie("token", token);
+        cookie.setPath("/");
+        cookie.setMaxAge(1000 * 60 * 60);
+        response.addCookie(cookie);
+        return "redirect:/list";
     }
 
     @GetMapping("/user/register")

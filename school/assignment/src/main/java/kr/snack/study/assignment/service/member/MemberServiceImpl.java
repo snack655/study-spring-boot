@@ -1,5 +1,6 @@
 package kr.snack.study.assignment.service.member;
 
+import kr.snack.study.assignment.config.jwt.JwtTokenProvider;
 import kr.snack.study.assignment.controller.form.LoginForm;
 import kr.snack.study.assignment.controller.form.RegisterForm;
 import kr.snack.study.assignment.domain.entity.Member;
@@ -20,6 +21,7 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Override
     public void register(RegisterForm registerForm) {
@@ -37,8 +39,10 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void login(LoginForm loginForm) {
+    public String login(LoginForm loginForm) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginForm.getId(), loginForm.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        return jwtTokenProvider.generateAccessToken(loginForm.getId());
     }
 }
