@@ -5,6 +5,9 @@
 <div class="container">
     <div th:replace="fragments/loginBodyHeader :: bodyHeader"></div>
     <div>
+        <script th:if="${exception != null}">
+            alert("아이디 또는 비밀번호가 틀렸습니다");
+        </script>
         <form method="post" action="/user/login">
             <div class="mb-3">
                 <label for="id" class="melog-input-label">id</label>

@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -25,23 +26,32 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping("/user/login")
-    public String loginForm(Model model) {
+    public String loginForm(Model model,
+                            @RequestParam(value = "error", required = false) String error,
+                            @RequestParam(value = "exception", required = false) String exception
+    ) {
+        if(error != null) {
+            if (error.equals("true")) {
+                model.addAttribute("exception", exception);
+            }
+        }
         model.addAttribute("form", new LoginForm());
         return "members/login";
     }
 
     @PostMapping("/user/login")
     public String login(
-            @ModelAttribute("form") @Valid LoginForm form,
+            @RequestParam("id") String id,
+            @RequestParam("password") String password,
             HttpServletResponse response,
             BindingResult bindingResult
     ) throws IOException {
-        System.out.println("----------------------- 여기 들어왔는지만 좀 봐야겠노..");
         if (bindingResult.hasErrors()) {
             System.out.println("로그인에서 걸렸습니다.... 제발 제발 걸렸닥 해줘");
             ScriptUtils.alertAndMovePage(response, bindingResult.toString(), "/members/login");
         }
 
+        LoginForm form = new LoginForm(id, password);
         String token = memberService.login(form);
         Cookie cookie = new Cookie("token", token);
         cookie.setPath("/");
